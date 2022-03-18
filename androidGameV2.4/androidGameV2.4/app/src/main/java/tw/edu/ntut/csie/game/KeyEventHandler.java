@@ -12,7 +12,8 @@ import android.view.KeyEvent;
  */
 public interface KeyEventHandler {
 
-    /**
+    /**878
+     *
      * 上方向鍵的鍵值
      */
     public static final int KEY_UP = KeyEvent.KEYCODE_DPAD_UP;
