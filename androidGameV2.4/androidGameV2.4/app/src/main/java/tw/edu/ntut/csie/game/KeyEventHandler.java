@@ -12,7 +12,12 @@ import android.view.KeyEvent;
  */
 public interface KeyEventHandler {
 
-    /**878
+    /**8785645646
+     * 56
+     * 6
+     * 6
+     * 6
+     * 6
      *
      * 上方向鍵的鍵值
      */
