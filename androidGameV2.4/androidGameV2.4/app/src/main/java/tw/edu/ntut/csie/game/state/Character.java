@@ -3,18 +3,33 @@ package tw.edu.ntut.csie.game.state;
 import tw.edu.ntut.csie.game.GameObject;
 import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
+import tw.edu.ntut.csie.game.extend.Animation;
 
 public class Character implements GameObject {
-    private MovingBitmap _basic;
+    private Animation _basic;
     private int px, py;
 
     public Character(){
-        _basic = new MovingBitmap(R.drawable.basic);
-        px=250;
-        py=100;
+        px=387;
+        py=63;
     }
     public void initialize(){
-        _basic.setLocation(px,py);
+
+        _basic = new Animation();
+        _basic.setLocation(px, py);
+        _basic.addFrame(R.drawable.basic1);
+        _basic.addFrame(R.drawable.basic2);
+        _basic.addFrame(R.drawable.basic3);
+        _basic.addFrame(R.drawable.basic4);
+        _basic.addFrame(R.drawable.basic3);
+        _basic.addFrame(R.drawable.basic2);
+        _basic.addFrame(R.drawable.basic1);
+        _basic.addFrame(R.drawable.basic5);
+        _basic.addFrame(R.drawable.basic6);
+        _basic.addFrame(R.drawable.basic7);
+        _basic.addFrame(R.drawable.basic6);
+        _basic.addFrame(R.drawable.basic5);
+        _basic.setDelay(1);
     }
 
     @Override
@@ -25,11 +40,12 @@ public class Character implements GameObject {
 
     @Override
     public void move() {
-
+        _basic.move();
     }
 
     @Override
     public void show(){
+
         _basic.show();
     }
 }

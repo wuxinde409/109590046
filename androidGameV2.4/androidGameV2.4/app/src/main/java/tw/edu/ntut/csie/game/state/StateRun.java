@@ -16,21 +16,27 @@ import tw.edu.ntut.csie.game.extend.Integer;
 public class StateRun extends GameState {
     public static final int DEFAULT_SCORE_DIGITS = 4;
     private Character _basic;
+    private Enemy _enemy;
+    private Evil _evil;
     private MovingBitmap mPractice;
-    private MovingBitmap _background;
-    private MovingBitmap _android;
-    private MovingBitmap _cloud;
-    private MovingBitmap _door;
-    private MovingBitmap _message;
+    private MovingBitmap _background1;
+    private MovingBitmap _lefttop;
+    private MovingBitmap _leftdown;
+    private MovingBitmap _righttop;
+    private MovingBitmap _rightdown;
 
-    private Animation _flower;
+//    private MovingBitmap _cloud;
 
-    private Integer _scores;
+//    private MovingBitmap _message;
+
+//    private Animation _flower;
+
+//    private Integer _scores;
 
     private boolean _grab;
     private int _cx, _cy;
 
-    private Audio _music;
+//    private Audio _music;
 
     public StateRun(GameEngine engine) {
         super(engine);
@@ -41,37 +47,39 @@ public class StateRun extends GameState {
         _basic= new Character();
         _basic.initialize();
 
+        _enemy= new Enemy();
+        _enemy.initialize();
+
+        _evil= new Evil();
+        _evil.initialize();
+
         mPractice= new MovingBitmap(R.drawable.ntut_csie);
         mPractice.setLocation(250,50);
 
-        _background = new MovingBitmap(R.drawable.background);
-        _message = new MovingBitmap(R.drawable.message, 130, 150);
+        _background1 = new MovingBitmap(R.drawable.background1);
+        _lefttop = new MovingBitmap(R.drawable.lefttop);
+        _lefttop.setLocation(0,0);
+        _righttop = new MovingBitmap(R.drawable.righttop);
+        _righttop.setLocation(513,0);
+        _leftdown = new MovingBitmap(R.drawable.leftdown);
+        _leftdown.setLocation(0,137);
+        _rightdown = new MovingBitmap(R.drawable.rightdown);
+        _rightdown.setLocation(463,137);
 
-        _android = new MovingBitmap(R.drawable.android_green);
-        _android.setLocation(100, 200);
+//        _scores = new Integer(DEFAULT_SCORE_DIGITS, 50, 550, 10);
 
-        _cloud = new MovingBitmap(R.drawable.cloud);
-        _cx = 100;
-        _cy = 50;
-        _cloud.setLocation(_cx, _cy);
+//        _flower = new Animation();
+//        _flower.setLocation(560, 310);
+//        _flower.addFrame(R.drawable.flower1);
+//        _flower.addFrame(R.drawable.flower2);
+//        _flower.addFrame(R.drawable.flower3);
+//        _flower.addFrame(R.drawable.flower4);
+//        _flower.addFrame(R.drawable.flower5);
+//        _flower.setDelay(2);
 
-        _door = new MovingBitmap(R.drawable.door);
-        _door.setLocation(300, 200);
-
-        _scores = new Integer(DEFAULT_SCORE_DIGITS, 50, 550, 10);
-
-        _flower = new Animation();
-        _flower.setLocation(560, 310);
-        _flower.addFrame(R.drawable.flower1);
-        _flower.addFrame(R.drawable.flower2);
-        _flower.addFrame(R.drawable.flower3);
-        _flower.addFrame(R.drawable.flower4);
-        _flower.addFrame(R.drawable.flower5);
-        _flower.setDelay(2);
-
-        _music = new Audio(R.raw.ntut);
-        _music.setRepeating(true);
-        _music.play();
+//        _music = new Audio(R.raw.ntut);
+//        _music.setRepeating(true);
+//        _music.play();
 
         _grab = false;
 
@@ -79,45 +87,54 @@ public class StateRun extends GameState {
 
     @Override
     public void move() {
-        _flower.move();
-        _cloud.setLocation(_cx, _cy);
+        _basic.move();
+        _enemy.move();
+        _evil.move();
+//        _flower.move();
     }
 
     @Override
     public void show() {
         mPractice.show();
-        _background.show();
-        _scores.show();
-        _flower.show();
-        _message.show();
-        //_cloud.show();
-        _door.show();
-        _android.show();
+        _background1.show();
+        _lefttop.show();
+        _righttop.show();
+        _leftdown.show();
+        _rightdown.show();
+//        _scores.show();
+//        _flower.show();
         _basic.show();
+        _enemy.show();
+        _evil.show();
     }
 
     @Override
     public void release() {
-        _background.release();
-        _scores.release();
-        _android.release();
-        _flower.release();
-        _message.release();
-        _cloud.release();
-        _music.release();
-        _door.release();
+        _background1.release();
+        _lefttop.release();
+        _righttop.release();
+        _leftdown.release();
+        _rightdown.release();
+//        _scores.release();
+//        _flower.release();
+//        _music.release();
         mPractice.release();
         _basic.release();
+        _enemy.release();
+        _evil.release();
+        _lefttop=null;
+        _righttop=null;
+        _leftdown=null;
+        _rightdown=null;
         _basic=null;
+        _enemy=null;
+        _evil=null;
         mPractice=null;
-        _background = null;
-        _scores = null;
-        _android = null;
-        _flower = null;
-        _message = null;
-        _cloud = null;
-        _music = null;
-        _door = null;
+        _background1 = null;
+
+//        _scores = null;
+//        _flower = null;
+//        _music = null;
     }
 
     @Override
@@ -132,10 +149,10 @@ public class StateRun extends GameState {
 
     @Override
     public void orientationChanged(float pitch, float azimuth, float roll) {
-        if (roll > 15 && roll < 60 && _cx > 50)
-            _cx -= 2;
-        if (roll < -15 && roll > -60 && _cx + _cloud.getWidth() < 500)
-            _cx += 2;
+//        if (roll > 15 && roll < 60 && _cx > 50)
+//            _cx -= 2;
+//        if (roll < -15 && roll > -60 && _cx + _cloud.getWidth() < 500)
+//            _cx += 2;
     }
 
     @Override
@@ -145,7 +162,7 @@ public class StateRun extends GameState {
 
     @Override
     public boolean pointerPressed(Pointer actionPointer, List<Pointer> pointers) {
-        _message.setVisible(false);
+//        _message.setVisible(false);
         return true;
     }
 
@@ -166,11 +183,11 @@ public class StateRun extends GameState {
 
     @Override
     public void pause() {
-        _music.pause();
+        //_music.pause();
     }
 
     @Override
     public void resume() {
-        _music.resume();
+        //_music.resume();
     }
 }
