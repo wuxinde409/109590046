@@ -18,6 +18,9 @@ public class StateRun extends GameState {
     private Character _basic;
     private Enemy _enemy;
     private Evil _evil;
+    private Stone _stone;
+    private Torch _torch;
+    private Frame _frame;
     private MovingBitmap mPractice;
     private MovingBitmap _background1;
     private MovingBitmap _lefttop;
@@ -53,6 +56,14 @@ public class StateRun extends GameState {
         _evil= new Evil();
         _evil.initialize();
 
+        _stone= new Stone();
+        _stone.initialize();
+
+        _torch= new Torch();
+        _torch.initialize();
+
+        _frame= new Frame();
+        _frame.initialize();
         mPractice= new MovingBitmap(R.drawable.ntut_csie);
         mPractice.setLocation(250,50);
 
@@ -90,6 +101,7 @@ public class StateRun extends GameState {
         _basic.move();
         _enemy.move();
         _evil.move();
+        _frame.move();
 //        _flower.move();
     }
 
@@ -106,6 +118,9 @@ public class StateRun extends GameState {
         _basic.show();
         _enemy.show();
         _evil.show();
+        _stone.show();
+        _torch.show();
+        _frame.show();
     }
 
     @Override
@@ -122,6 +137,9 @@ public class StateRun extends GameState {
         _basic.release();
         _enemy.release();
         _evil.release();
+        _stone.release();
+        _torch.release();
+        _frame.release();
         _lefttop=null;
         _righttop=null;
         _leftdown=null;
@@ -129,6 +147,9 @@ public class StateRun extends GameState {
         _basic=null;
         _enemy=null;
         _evil=null;
+        _stone=null;
+        _torch=null;
+        _frame=null;
         mPractice=null;
         _background1 = null;
 
