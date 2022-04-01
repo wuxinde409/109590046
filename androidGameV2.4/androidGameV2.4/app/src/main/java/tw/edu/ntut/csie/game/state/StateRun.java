@@ -14,7 +14,9 @@ import tw.edu.ntut.csie.game.engine.GameEngine;
 import tw.edu.ntut.csie.game.extend.Animation;
 import tw.edu.ntut.csie.game.extend.Integer;
 public class StateRun extends GameState {
+    public Open _open;
     public static final int DEFAULT_SCORE_DIGITS = 4;
+
     private Character _basic;
     private Enemy _enemy;
     private Evil _evil;
@@ -47,6 +49,9 @@ public class StateRun extends GameState {
 
     @Override
     public void initialize(Map<String, Object> data) {
+        _open= new Open();
+        _open.initialize();
+
         _basic= new Character();
         _basic.initialize();
 
@@ -102,6 +107,7 @@ public class StateRun extends GameState {
         _enemy.move();
         _evil.move();
         _frame.move();
+        _open.move();
 //        _flower.move();
     }
 
@@ -121,10 +127,13 @@ public class StateRun extends GameState {
         _stone.show();
         _torch.show();
         _frame.show();
+
+        _open.show();
     }
 
     @Override
     public void release() {
+        _open.release();
         _background1.release();
         _lefttop.release();
         _righttop.release();
@@ -152,6 +161,7 @@ public class StateRun extends GameState {
         _frame=null;
         mPractice=null;
         _background1 = null;
+        _open = null;
 
 //        _scores = null;
 //        _flower = null;
