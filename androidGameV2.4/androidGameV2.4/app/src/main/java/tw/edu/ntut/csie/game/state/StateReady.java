@@ -47,12 +47,7 @@ public class StateReady extends AbstractGameState {
     // �}�o²��
     private void initializeAboutButton() {
         addGameObject(_aboutButton = new BitmapButton(R.drawable.about, R.drawable.about_pressed, 465, 270));
-        _aboutButton.addButtonEventHandler(new ButtonEventHandler() {
-            @Override
-            public void perform(BitmapButton button) {
-                setVisibility(false, true);
-            }
-        });
+        _aboutButton.addButtonEventHandler(button -> setVisibility(false, true));
         addPointerEventHandler(_aboutButton);
     }
 
@@ -90,12 +85,7 @@ public class StateReady extends AbstractGameState {
      */
     private void initializeExitButton() {
         addGameObject(_exitButton = new BitmapButton(R.drawable.exit, R.drawable.exit_pressed, 465, 320));
-        _exitButton.addButtonEventHandler(new ButtonEventHandler() {
-            @Override
-            public void perform(BitmapButton button) {
-                _engine.exit();
-            }
-        });
+        _exitButton.addButtonEventHandler(button -> _engine.exit());
         addPointerEventHandler(_exitButton);
     }
 
@@ -104,12 +94,7 @@ public class StateReady extends AbstractGameState {
      */
     private void initializeStartButton() {
         addGameObject(_startButton = new BitmapButton(R.drawable.start, R.drawable.start_pressed, 465, 170));
-        _startButton.addButtonEventHandler(new ButtonEventHandler() {
-            @Override
-            public void perform(BitmapButton button) {
-                changeState(Game.RUNNING_STATE);
-            }
-        });
+        _startButton.addButtonEventHandler(button -> changeState(Game.RUNNING_STATE));
         addPointerEventHandler(_startButton);
     }
 

@@ -12,17 +12,25 @@ import tw.edu.ntut.csie.game.core.Audio;
 import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.engine.GameEngine;
 import tw.edu.ntut.csie.game.extend.Animation;
+import tw.edu.ntut.csie.game.extend.BitmapButton;
+import tw.edu.ntut.csie.game.extend.ButtonEventHandler;
 import tw.edu.ntut.csie.game.extend.Integer;
-public class StateRun extends GameState {
+public class StateRun extends AbstractGameState {
     public Open _open;
     public static final int DEFAULT_SCORE_DIGITS = 4;
-
     private Character _basic;
     private Enemy _enemy;
     private Evil _evil;
     private Stone _stone;
     private Torch _torch;
     private Frame _frame;
+
+    private GameMap gameMap = new GameMap();
+
+    private BitmapButton _up;
+    private BitmapButton _down;
+    private BitmapButton _left;
+    private BitmapButton _right;
     private MovingBitmap mPractice;
     private MovingBitmap _background1;
     private MovingBitmap _lefttop;
@@ -37,9 +45,9 @@ public class StateRun extends GameState {
 //    private Animation _flower;
 
 //    private Integer _scores;
+//    private boolean _grab;
 
-    private boolean _grab;
-    private int _cx, _cy;
+    private int px=387, py=63;
 
 //    private Audio _music;
 
@@ -49,6 +57,11 @@ public class StateRun extends GameState {
 
     @Override
     public void initialize(Map<String, Object> data) {
+        initializeUp();
+        initializeDown();
+        initializeRight();
+        initializeLeft();
+
         _open= new Open();
         _open.initialize();
 
@@ -69,6 +82,7 @@ public class StateRun extends GameState {
 
         _frame= new Frame();
         _frame.initialize();
+
         mPractice= new MovingBitmap(R.drawable.ntut_csie);
         mPractice.setLocation(250,50);
 
@@ -84,21 +98,37 @@ public class StateRun extends GameState {
 
 //        _scores = new Integer(DEFAULT_SCORE_DIGITS, 50, 550, 10);
 
-//        _flower = new Animation();
-//        _flower.setLocation(560, 310);
-//        _flower.addFrame(R.drawable.flower1);
-//        _flower.addFrame(R.drawable.flower2);
-//        _flower.addFrame(R.drawable.flower3);
-//        _flower.addFrame(R.drawable.flower4);
-//        _flower.addFrame(R.drawable.flower5);
-//        _flower.setDelay(2);
-
 //        _music = new Audio(R.raw.ntut);
 //        _music.setRepeating(true);
 //        _music.play();
 
-        _grab = false;
+//        _grab = false;
 
+    }
+
+    public void initializeUp(){
+        _up = new BitmapButton(R.drawable.up,58,250);
+        addGameObject(_up);
+        _up.addButtonEventHandler(button -> _basic._basic.setLocation(px, py=py-35));
+        addPointerEventHandler(_up);
+    }
+    public void initializeDown(){
+        _down = new BitmapButton(R.drawable.down,58,290);
+        addGameObject(_down);
+        _down.addButtonEventHandler(button -> _basic._basic.setLocation(px, py=py+35));
+        addPointerEventHandler(_down);
+    }
+    public void initializeRight(){
+        _right = new BitmapButton(R.drawable.right,93,290);
+        addGameObject(_right);
+        _right.addButtonEventHandler(button -> _basic._basic.setLocation(px=px+35, py));
+        addPointerEventHandler(_right);
+    }
+    public void initializeLeft(){
+        _left = new BitmapButton(R.drawable.left,23,290);
+        addGameObject(_left);
+        _left.addButtonEventHandler(button -> _basic._basic.setLocation(px=px-35, py));
+        addPointerEventHandler(_left);
     }
 
     @Override
@@ -108,7 +138,8 @@ public class StateRun extends GameState {
         _evil.move();
         _frame.move();
         _open.move();
-//        _flower.move();
+//      _flower.move();
+//      Log.d("d","dd");
     }
 
     @Override
@@ -121,13 +152,18 @@ public class StateRun extends GameState {
         _rightdown.show();
 //        _scores.show();
 //        _flower.show();
-        _basic.show();
+        _basic._basic.show();
         _enemy.show();
         _evil.show();
         _stone.show();
         _torch.show();
         _frame.show();
+        _up.show();
+        _down.show();
+        _right.show();
+        _left.show();
 
+        gameMap.show();
         _open.show();
     }
 
@@ -149,6 +185,11 @@ public class StateRun extends GameState {
         _stone.release();
         _torch.release();
         _frame.release();
+        _up.release();
+        _down.release();
+        _right.release();
+        _left.release();
+        gameMap.release();
         _lefttop=null;
         _righttop=null;
         _leftdown=null;
@@ -161,6 +202,10 @@ public class StateRun extends GameState {
         _frame=null;
         mPractice=null;
         _background1 = null;
+        _up=null;
+        _down=null;
+        _left=null;
+        _right=null;
         _open = null;
 
 //        _scores = null;
@@ -191,26 +236,26 @@ public class StateRun extends GameState {
         // TODO Auto-generated method stub
     }
 
-    @Override
-    public boolean pointerPressed(Pointer actionPointer, List<Pointer> pointers) {
-//        _message.setVisible(false);
-        return true;
-    }
-
-    @Override
-    public boolean pointerMoved(Pointer actionPointer, List<Pointer> pointers) {
-        return false;
-    }
-
-    public void resizeAndroidIcon() {
-
-    }
-
-    @Override
-    public boolean pointerReleased(Pointer actionPointer, List<Pointer> pointers) {
-        _grab = false;
-        return false;
-    }
+//    @Override
+//    public boolean pointerPressed(Pointer actionPointer, List<Pointer> pointers) {
+////        _message.setVisible(false);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean pointerMoved(Pointer actionPointer, List<Pointer> pointers) {
+//        return false;
+//    }
+//
+//    public void resizeAndroidIcon() {
+//
+//    }
+//
+//    @Override
+//    public boolean pointerReleased(Pointer actionPointer, List<Pointer> pointers) {
+////        _grab = false;
+//        return false;
+//    }
 
     @Override
     public void pause() {
