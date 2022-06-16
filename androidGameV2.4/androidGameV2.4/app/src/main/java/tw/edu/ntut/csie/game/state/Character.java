@@ -6,7 +6,7 @@ import tw.edu.ntut.csie.game.core.MovingBitmap;
 import tw.edu.ntut.csie.game.extend.Animation;
 
 public class Character implements GameObject {
-    private Animation _basic;
+    public Animation _basic;
     private int px, py;
 
     public Character(){

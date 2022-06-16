@@ -5,9 +5,9 @@ import tw.edu.ntut.csie.game.R;
 import tw.edu.ntut.csie.game.extend.Animation;
 
 public class Enemy implements GameObject {
-    private Animation _enemy1;
-    private Animation _enemy2;
-    private Animation _enemy3;
+    public Animation _enemy1;
+    public Animation _enemy2;
+    public Animation _enemy3;
     private int px, py;
     private int px1, py1;
     private int px2, py2;
